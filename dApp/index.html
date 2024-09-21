@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratitude DApp</title>
+
+  <!-- TailwindCSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header Section -->
+  <header class="bg-blue-600 text-white text-center p-4">
+    <h1 class="text-3xl font-bold">Gratitude DApp</h1>
+    <p class="text-lg">Share your gratitude on the blockchain</p>
+  </header>
+
+  <!-- Main Container -->
+  <div class="max-w-4xl mx-auto p-6 mt-6 bg-white shadow-lg rounded-lg">
+
+    <!-- Gratitude Form Section -->
+    <div id="gratitudeFormSection" class="mb-8 hidden">
+      <h2 class="text-2xl font-semibold mb-4">Send a Gratitude Note</h2>
+      <form id="gratitudeForm" class="space-y-4">
+        <input type="text" id="recipient" class="w-full p-3 border rounded-lg" placeholder="Recipient's Name" required>
+        <textarea id="message" class="w-full p-3 border rounded-lg" rows="4" placeholder="Your message of gratitude" required></textarea>
+        <input type="text" id="recipientWallet" class="w-full p-3 border rounded-lg" placeholder="Recipient's Ethereum Wallet Address" required> <!-- Wallet Address Field -->
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700">
+          Send Gratitude Note
+        </button>
+      </form>
+    </div>
+
+    <!-- Wallet connection -->
+    <button id="connectWallet" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg mt-4">
+      Connect MetaMask Wallet
+    </button>
+    <p id="walletAddress" class="mt-2 text-center text-gray-600"></p>
+
+  </div>
+
+  <!-- Ether Modal -->
+  <div id="etherModal" class="fixed inset-0 hidden flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h3 class="text-lg font-semibold mb-4">Enter Ether Amount</h3>
+      <input type="number" id="etherAmount" class="w-full p-3 border rounded-lg" placeholder="Amount in ETH" required>
+      <div class="mt-4 space-x-4 flex justify-end">
+        <button id="cancelEther" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Cancel</button>
+        <button id="submitEther" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+    <div class="text-center text-white">
+      <div class="inline-block w-16 h-16 spinner"></div> <!-- Updated spinner class -->
+      <p class="mt-4 text-2xl font-semibold">Hang tight... 🕐</p>
+      <p class="text-lg mt-2">Sending your gratitude on the blockchain...</p>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="fixed inset-0 hidden flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+      <h3 id="modalTitle" class="text-lg font-semibold mb-4">Gratitude Sent On Blockchain!</h3>
+      <p id="modalMessage" class="text-gray-700 mb-2"></p>
+      <p id="modalAmount" class="text-gray-700 mb-2"></p>
+      <p id="modalTxHash" class="text-blue-600 break-all">Transaction Hash: <a href="" id="txLink" target="_blank" class="text-blue-600 underline">View on Etherscan</a></p>
+      <button id="closeSuccessModal" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-full">Close</button> <!-- Close button -->
+    </div>
+  </div>
+
+  <!-- Failed Modal -->
+  <div id="failedModal" class="fixed inset-0 hidden flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+      <h3 class="text-lg font-semibold mb-4">Transaction Failed!</h3>
+      <p class="text-gray-700">Please try again later.</p>
+    </div>
+  </div>
+
+  <!-- Insufficient Balance Modal -->
+  <div id="insufficientBalanceModal" class="fixed inset-0 hidden flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+      <h3 class="text-lg font-semibold mb-4">Insufficient Balance</h3>
+      <p id="balanceMessage" class="text-gray-700"></p> <!-- Balance display -->
+      <button id="closeInsufficientBalanceModal" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-full">Close</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.5.4/dist/ethers.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
